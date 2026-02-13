@@ -1,0 +1,3 @@
+recursive-include backend/app/frontend_dist *
+include LICENSE
+include README.md

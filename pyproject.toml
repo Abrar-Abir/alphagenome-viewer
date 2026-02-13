@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "alphagenome-viewer"
+version = "1.0.0"
+description = "Web interface for Google DeepMind's AlphaGenome genomic prediction model"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+authors = [{name = "Abrar Abir", email = "abir@cmu.edu"}]
+keywords = ["genomics", "alphagenome", "deepmind", "variant-effect", "bioinformatics", "visualization"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+    "Intended Audience :: Science/Research",
+]
+dependencies = [
+    "fastapi>=0.109.0",
+    "uvicorn[standard]>=0.27.0",
+    "alphagenome>=0.5.0",
+    "pandas>=2.0.0",
+    "matplotlib>=3.8.0",
+    "pydantic>=2.0.0",
+    "python-multipart>=0.0.6",
+]
+
+[project.scripts]
+alphagenome-viewer = "app.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/Abrar-Abir/alphagenome-viewer"
+Repository = "https://github.com/Abrar-Abir/alphagenome-viewer"
+
+[tool.setuptools.packages.find]
+where = ["backend"]
+
+[tool.setuptools.package-data]
+app = ["frontend_dist/**/*"]

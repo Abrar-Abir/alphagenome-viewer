@@ -1,0 +1,14 @@
+.git
+.claude
+backend/plots/
+backend/.apikey
+frontend/node_modules/
+frontend/dist/
+*.sif
+*.log
+__pycache__
+.pytest_cache
+.coverage
+htmlcov
+*.bak
+*.tmp

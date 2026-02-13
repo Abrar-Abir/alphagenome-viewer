@@ -1,0 +1,105 @@
+Bootstrap: docker
+From: python:3.11-slim
+
+%labels
+    Author AlphaGenome Viewer
+    Version 1.0.0
+
+%help
+    AlphaGenome Viewer — Genomic Predictions Viewer
+    ================================================
+
+    Build:
+        apptainer build alphagenome-viewer.sif alphagenome-viewer.def
+
+    Run (foreground):
+        mkdir -p ./data/plots
+        apptainer run \
+            --bind ./data/plots:/opt/alphagenome-viewer/data/plots \
+            alphagenome-viewer.sif
+
+    Run as instance (background):
+        apptainer instance start \
+            --bind ./data/plots:/opt/alphagenome-viewer/data/plots \
+            alphagenome-viewer.sif alphagenome
+
+        apptainer instance stop alphagenome
+
+    Environment variables (pass with APPTAINERENV_ prefix):
+        AGVIEWER_PORT    - Port to listen on (default: 8000)
+        AGVIEWER_HOST    - Host to bind to (default: 0.0.0.0)
+        AGVIEWER_WORKERS - Number of uvicorn workers (default: 1)
+
+    Writable bind-mount targets:
+        /opt/alphagenome-viewer/data/plots   - Generated prediction plots
+
+    Open http://localhost:8000 after starting.
+
+%files
+    backend/requirements.txt /opt/alphagenome-viewer/backend/requirements.txt
+    backend/app /opt/alphagenome-viewer/backend/app
+    frontend/package.json /opt/alphagenome-viewer/frontend/package.json
+    frontend/package-lock.json /opt/alphagenome-viewer/frontend/package-lock.json
+    frontend/index.html /opt/alphagenome-viewer/frontend/index.html
+    frontend/vite.config.js /opt/alphagenome-viewer/frontend/vite.config.js
+    frontend/tailwind.config.js /opt/alphagenome-viewer/frontend/tailwind.config.js
+    frontend/postcss.config.js /opt/alphagenome-viewer/frontend/postcss.config.js
+    frontend/jsconfig.json /opt/alphagenome-viewer/frontend/jsconfig.json
+    frontend/src /opt/alphagenome-viewer/frontend/src
+    frontend/public /opt/alphagenome-viewer/frontend/public
+
+%post
+    # System dependencies
+    apt-get update && apt-get install -y --no-install-recommends \
+        curl \
+        ca-certificates \
+        && rm -rf /var/lib/apt/lists/*
+
+    # Install Node.js 20 LTS (for frontend build only)
+    curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+    apt-get install -y --no-install-recommends nodejs
+    rm -rf /var/lib/apt/lists/*
+
+    # Install Python dependencies
+    cd /opt/alphagenome-viewer/backend
+    pip install --no-cache-dir -r requirements.txt
+
+    # Build frontend
+    cd /opt/alphagenome-viewer/frontend
+    npm ci
+    npm run build
+
+    # Copy built frontend alongside backend
+    cp -r dist /opt/alphagenome-viewer/frontend_dist
+
+    # Clean up build tools and source (not needed at runtime)
+    rm -rf /opt/alphagenome-viewer/frontend/node_modules
+    rm -rf /opt/alphagenome-viewer/frontend/src
+    apt-get purge -y nodejs
+    apt-get autoremove -y
+    rm -rf /var/lib/apt/lists/*
+
+    # Create writable data directories (bind-mount targets)
+    mkdir -p /opt/alphagenome-viewer/data/plots
+
+%environment
+    export PLOTS_DIR=/opt/alphagenome-viewer/data/plots
+    export FRONTEND_DIST_DIR=/opt/alphagenome-viewer/frontend_dist
+    export CORS_ORIGINS="*"
+    export AGVIEWER_PORT=8000
+    export AGVIEWER_HOST=0.0.0.0
+    export AGVIEWER_WORKERS=1
+
+%runscript
+    cd /opt/alphagenome-viewer/backend
+    exec uvicorn app.main:app \
+        --host "${AGVIEWER_HOST:-0.0.0.0}" \
+        --port "${AGVIEWER_PORT:-8000}" \
+        --workers "${AGVIEWER_WORKERS:-1}"
+
+%startscript
+    cd /opt/alphagenome-viewer/backend
+    exec uvicorn app.main:app \
+        --host "${AGVIEWER_HOST:-0.0.0.0}" \
+        --port "${AGVIEWER_PORT:-8000}" \
+        --workers "${AGVIEWER_WORKERS:-1}"

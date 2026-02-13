@@ -1,0 +1,13 @@
+services:
+  alphagenome:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - plots:/app/data/plots
+    environment:
+      - CORS_ORIGINS=*
+      - AGVIEWER_WORKERS=1
+
+volumes:
+  plots:
