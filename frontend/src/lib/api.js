@@ -35,12 +35,6 @@ export const fetchOutputTypes = async () => {
   return data.output_types
 }
 
-export const fetchOntologyTerms = async (search = '') => {
-  const params = search ? { search } : {}
-  const { data } = await api.get('/api/metadata/ontology-terms', { params })
-  return data.terms
-}
-
 export const predictInterval = async (request) => {
   const { data } = await api.post('/api/predict/interval', request)
   return data

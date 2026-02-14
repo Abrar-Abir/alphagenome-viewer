@@ -1,13 +1,9 @@
-"""Metadata endpoints for output types and ontology terms."""
+"""Metadata endpoints for output types."""
 
-from typing import Optional
+from fastapi import APIRouter
 
-from fastapi import APIRouter, Query
-
-from app.config import ONTOLOGY_TERMS, OUTPUT_TYPE_DESCRIPTIONS
+from app.config import OUTPUT_TYPE_DESCRIPTIONS
 from app.schemas.models import (
-    OntologyTerm,
-    OntologyTermsResponse,
     OutputType,
     OutputTypeInfo,
     OutputTypesResponse,
@@ -27,21 +23,3 @@ def get_output_types():
         for ot in OutputType
     ]
     return OutputTypesResponse(output_types=output_types)
-
-
-@router.get("/ontology-terms", response_model=OntologyTermsResponse)
-def get_ontology_terms(search: Optional[str] = Query(None, description="Search term")):
-    """Get ontology terms, optionally filtered by search."""
-    terms = ONTOLOGY_TERMS
-
-    if search:
-        search_lower = search.lower()
-        terms = [
-            t
-            for t in terms
-            if search_lower in t["name"].lower() or search_lower in t["code"].lower()
-        ]
-
-    return OntologyTermsResponse(
-        terms=[OntologyTerm(**t) for t in terms]
-    )

@@ -74,20 +74,6 @@ class OutputTypesResponse(BaseModel):
     output_types: list[OutputTypeInfo]
 
 
-class OntologyTerm(BaseModel):
-    """Ontology term information."""
-
-    name: str
-    code: str
-    type: str
-
-
-class OntologyTermsResponse(BaseModel):
-    """Response for ontology terms endpoint."""
-
-    terms: list[OntologyTerm]
-
-
 class IntervalInfo(BaseModel):
     """Information about a genomic interval."""
 
