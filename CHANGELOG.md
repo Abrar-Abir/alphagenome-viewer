@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.0.1] - 2026-02-14
+
+### Fixed
+- Fix startup race condition: retry network errors during server startup
+- Scope jsconfig.json to src/ to fix VSCode warnings
+
+### Changed
+- Hardcode ontology terms in frontend, remove redundant backend endpoint
+- Use project icon as browser tab favicon
+- Add third-party license notices for dependencies
+
 ## [1.0.0] - 2025-02-13
 
 ### Added

@@ -3,7 +3,7 @@ From: python:3.11-slim
 
 %labels
     Author AlphaGenome Viewer
-    Version 1.0.0
+    Version 1.0.1
 
 %help
     AlphaGenome Viewer — Genomic Predictions Viewer

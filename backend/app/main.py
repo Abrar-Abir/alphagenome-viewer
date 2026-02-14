@@ -12,7 +12,7 @@ from app.routers import config, metadata, predictions, variants
 
 app = FastAPI(
     title="AlphaGenome Viewer API",
-    version="1.0.0",
+    version="1.0.1",
     description="API for AlphaGenome genomic predictions",
 )
 
