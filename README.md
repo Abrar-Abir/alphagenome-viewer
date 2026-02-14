@@ -161,3 +161,5 @@ Contributions are welcome! Please open an issue first to discuss what you'd like
 ## License
 
 [MIT](LICENSE)
+
+This project uses open-source dependencies under their own licenses. See [THIRD-PARTY-NOTICES](THIRD-PARTY-NOTICES) for details.

@@ -1,0 +1,94 @@
+This project incorporates material from the open-source projects listed below.
+Their license terms apply to their respective code only — not to this project
+as a whole, which is distributed under the MIT License (see LICENSE).
+
+────────────────────────────────────────────────────────────────────────────────
+
+AlphaGenome SDK
+  Copyright Google DeepMind
+  Apache License 2.0
+  https://github.com/google-deepmind/alphagenome
+
+FastAPI
+  Copyright Sebastián Ramírez
+  MIT License
+  https://github.com/fastapi/fastapi
+
+Uvicorn
+  Copyright Encode OSS Ltd
+  BSD 3-Clause License
+  https://github.com/encode/uvicorn
+
+Pydantic
+  Copyright Samuel Colvin
+  MIT License
+  https://github.com/pydantic/pydantic
+
+Matplotlib
+  Copyright Matplotlib Development Team
+  Matplotlib License (PSF-based)
+  https://github.com/matplotlib/matplotlib
+
+pandas
+  Copyright pandas Development Team
+  BSD 3-Clause License
+  https://github.com/pandas-dev/pandas
+
+React
+  Copyright Meta Platforms, Inc.
+  MIT License
+  https://github.com/facebook/react
+
+Vite
+  Copyright Evan You
+  MIT License
+  https://github.com/vitejs/vite
+
+Tailwind CSS
+  Copyright Tailwind Labs, Inc.
+  MIT License
+  https://github.com/tailwindlabs/tailwindcss
+
+shadcn/ui
+  MIT License
+  https://github.com/shadcn-ui/ui
+
+Radix UI
+  Copyright WorkOS
+  MIT License
+  https://github.com/radix-ui/primitives
+
+TanStack React Query
+  Copyright Tanner Linsley
+  MIT License
+  https://github.com/TanStack/query
+
+TanStack React Table
+  Copyright Tanner Linsley
+  MIT License
+  https://github.com/TanStack/table
+
+React Hook Form
+  Copyright Bill Luo
+  MIT License
+  https://github.com/react-hook-form/react-hook-form
+
+Zod
+  Copyright Colin McDonnell
+  MIT License
+  https://github.com/colinhacks/zod
+
+Axios
+  Copyright Matt Zabriskie
+  MIT License
+  https://github.com/axios/axios
+
+Lucide
+  Copyright Lucide Contributors
+  ISC License
+  https://github.com/lucide-icons/lucide
+
+────────────────────────────────────────────────────────────────────────────────
+
+Full license texts are available in each package's source repository and in
+their respective distributions under node_modules/ and Python site-packages/.
