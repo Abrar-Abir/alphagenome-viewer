@@ -20,7 +20,7 @@
     "@radix-ui/react-slot": "^1.1.0",
     "@tanstack/react-query": "^5.62.0",
     "@tanstack/react-table": "^8.20.0",
-    "axios": "^1.7.0",
+    "axios": "^1.18.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "cmdk": "^1.0.0",
